@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="add_edit_restaurant">Add/Edit restaurant</string>
+    <string name="hint_restaurant_name">Restaurant Name</string>
+    <string name="hint_restaurant_rating">Restaurant Rating</string>
+    <string name="hint_cuisines">Cuisines</string>
+    <string name="hint_cost_approx">Cost for two at restaurant(approx)</string>
+    <string name="Timings">Timings</string>
+</resources>

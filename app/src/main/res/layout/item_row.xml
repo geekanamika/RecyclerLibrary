@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="110dp"
+                   android:id="@+id/item_dp"
+                   tools:background="@tools:sample/avatars"
+                   android:layout_height="110dp"
+                   android:layout_margin="8dp" android:layout_marginStart="8dp"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_marginTop="8dp"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/tv_open_time"
+                      android:text="Opens at 6 pm"
+                      tools:textSize="12sp"
+                      android:textColor="@color/colorAccent"
+            />
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      tools:text="Wow Momo"
+                      android:id="@+id/tv_res_title"
+                      android:textSize="18sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/colorPrimary"
+            />
+            <TextView android:id="@+id/tv_cuisines"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      tools:text="Momos, Chinese Food"
+                      android:textStyle="normal"
+                      android:textSize="14sp"
+            />
+
+            <TextView android:id="@+id/tv_address"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="Sector 42, 43"
+                      android:textStyle="normal"
+                      android:textColor="@color/colorSecondaryLight"
+                      android:textSize="12sp"
+            />
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/tv_approx_cost"
+                      android:text="Rs 200 for two (apprx)"
+                      tools:textSize="14sp"
+            />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_margin="8dp"
+              android:textStyle="bold"
+              android:clickable="true"
+              android:textColor="@color/colorBlue"
+              android:layout_height="wrap_content"
+              android:text="Edit restaurant>>"/>
+
+
+</LinearLayout>
