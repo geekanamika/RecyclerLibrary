@@ -33,4 +33,8 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.ext.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
     implementation "com.google.android.material:material:$rootProject.ext.recyclerView"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.gsonVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.gsonVersion"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.lifecycle_version"
 }

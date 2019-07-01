@@ -5,27 +5,38 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list.recylerviewhelper.ItemClickListener
 import com.example.list.recylerviewhelper.ItemTouchHelperCallback
+import com.example.myapplication.data.AppNetworkSource
+import com.example.myapplication.data.Restaurant
+
 
 class MainActivity : AppCompatActivity() {
 
-    var list: MutableList<String> = ArrayList()
+    private var resLoadedData: LiveData<MutableList<Restaurant>>?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addData()
-
         val myrecyclerview : RecyclerView  = findViewById(R.id.my_list)
-        var myAdapter = PersonAdapter(list)
+
+        // network call
+        val networkSource = AppNetworkSource.getInstance()
+        resLoadedData = networkSource.loadedRestaurants
+        networkSource.loadRestaurants()
+
+
+        val myAdapter = PersonAdapter(mutableListOf())
 
         myrecyclerview.hasFixedSize()
-        myrecyclerview.layoutManager = LinearLayoutManager(this);
-        myrecyclerview.adapter = myAdapter;
+        myrecyclerview.layoutManager = LinearLayoutManager(this)
+        myrecyclerview.adapter = myAdapter
 
         // set touch helper
         val callback = ItemTouchHelperCallback(
@@ -35,32 +46,28 @@ class MainActivity : AppCompatActivity() {
             isLongPressEnabled = true
         )
 
+        // observer data change
+        resLoadedData?.observe(this, Observer {
+                value -> Log.d("myTag", "onobserver " + value.size)
+
+            myAdapter.myDataList?.clear()
+            myAdapter.myDataList?.addAll(value)
+            myAdapter!!.notifyDataSetChanged()
+        })
 
 
         val helper = ItemTouchHelper(callback)
          helper.attachToRecyclerView(myrecyclerview)
 
-        myrecyclerview.addOnItemTouchListener(
-            ItemClickListener(
-                this,
-                object : ItemClickListener.OnItemClickListener {
-                    override fun onItemClick(view: View, position: Int) {
-                        val value = "Clicked Item " + list[position] + " at " + position
-
-                        Log.d("TAG", value)
-                        Toast.makeText(this@MainActivity, value, Toast.LENGTH_SHORT).show()
-                    }
-                })
-        )
+        myrecyclerview.addOnItemTouchListener(ItemClickListener(
+            this, object : ItemClickListener.OnItemClickListener {
+                override fun onItemClick(view: View, position: Int) {
+                    val value = "Clicked Item " + myAdapter.myDataList?.get(position) + " at " + position
+                    Toast.makeText(this@MainActivity,value, Toast.LENGTH_SHORT ).show()
+                }
+            }
+        ) )
 
 
-    }
-
-    private fun addData() {
-        for (i in 1..10)
-            if(i % 2 == 0)
-                list.add("First-Name")
-            else
-                list.add("Second-Name")
     }
 }
